@@ -99,6 +99,7 @@ class Tamogotchi {
     }
     hatch() {
         this.resetFood();
+        this.changeMetabolism(1000);
         this.startMetabolism();
     }
     die() {

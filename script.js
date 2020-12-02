@@ -86,6 +86,7 @@ class Tamogotchi {
         gsap.set(this.deadEyes, {
             visibility: "visible"
         })
+        this.animateTalkStop();
     }
     changeMetabolism(newMetabolism) {
         clearInterval(this.metabolism);
@@ -120,24 +121,26 @@ class Tamogotchi {
                 this.die();
             }else{
                 this.animateSad();
+                let tamagotchi = this;
                 setTimeout(function(){
-                    this.animateTalk();
+                    tamagotchi.animateTalk();
                     target.innerHTML = "I don't feel so good"
                     setTimeout(function(){
-                        this.animateTalkStop();
-                        this.animateNeutral()
+                        tamagotchi.animateTalkStop();
+                        tamagotchi.animateNeutral()
                     })
                 }, 1000)
             }
         } else {
             this.food += randomFood.foodPoints;
             this.animateHappy();
+            let tamagotchi = this;
             setTimeout(function(){
-                this.animateTalk();
+                tamagotchi.animateTalk();
                 target.innerHTML = "That was great food!"
                 setTimeout(function(){
-                    this.animateTalkStop();
-                    this.animateNeutral()
+                    tamagotchi.animateTalkStop();
+                    tamagotchi.animateNeutral()
                 })
             }, 1000)
 

@@ -65,21 +65,6 @@ class Tamogotchi {
     }
 
     init() {
-        gsap.set(this.armRight, {
-            transformOrigin: "top center"
-        })
-        gsap.set(this.armLeft, {
-            transformOrigin: "top center"
-        })
-        gsap.set(this.previousEyes, {
-            visibility: "visible"
-        })
-        gsap.set(this.laughEyes, {
-            visibility: "hidden"
-        })
-        gsap.set(this.deadEyes, {
-            visibility: "hidden"
-        })
         console.log(`Hi!  I'm ${this.petName}`);
         fetch(this.data)
             .then(response => response.json())
@@ -98,6 +83,21 @@ class Tamogotchi {
         this.food = this.initialFood;
     }
     hatch() {
+        gsap.set(this.armRight, {
+            transformOrigin: "top center"
+        })
+        gsap.set(this.armLeft, {
+            transformOrigin: "top center"
+        })
+        gsap.set(this.previousEyes, {
+            visibility: "visible"
+        })
+        gsap.set(this.laughEyes, {
+            visibility: "hidden"
+        })
+        gsap.set(this.deadEyes, {
+            visibility: "hidden"
+        })
         this.resetFood();
         this.changeMetabolism(1000);
         this.startMetabolism();

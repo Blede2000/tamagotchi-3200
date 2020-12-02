@@ -65,6 +65,21 @@ class Tamogotchi {
     }
 
     init() {
+        gsap.set(this.armRight, {
+            transformOrigin: "top center"
+        })
+        gsap.set(this.armLeft, {
+            transformOrigin: "top center"
+        })
+        gsap.set(this.previousEyes, {
+            visibility: "visible"
+        })
+        gsap.set(this.laughEyes, {
+            visibility: "hidden"
+        })
+        gsap.set(this.deadEyes, {
+            visibility: "hidden"
+        })
         console.log(`Hi!  I'm ${this.petName}`);
         fetch(this.data)
             .then(response => response.json())
@@ -187,60 +202,62 @@ class Tamogotchi {
         }
     }
     animateNeutral() {
-        gsap.to(this.leftEar, {
-            x: 0,
-            y: 0
-        });
-        gsap.to(this.rightEar, {
-            x: 0,
-            y: 0
-        });
-        gsap.to(this.mouth, {
-            attr: {
-                d: "M316.82,408.09 Q380,408.09 434.43,408.09 M316.82,408.09 Q380,408.09 434.43,408.09",
-            },
-            y: 0
-        });
-        gsap.to([this.eyeLeft, this.eyeRight], {
-            attr: {
-                width: "42.44",
-                height: "148.85"
-            },
-            y: 0
-        })
-        gsap.to([this.pupilLeft, this.pupilRight], {
-            attr: {
-                width: "48.44",
-                height: "92.85"
-            },
-            y: 0
-        })
-
-        gsap.to(this.armLeft, {
-            rotate: 0
-        })
-
-        gsap.to(this.armRight, {
-            rotate: 0
-        })
-        gsap.to(this.eyebrowLeft, {
-            attr: {
-                d: "M315,298.85 C315,228.85 413,228.85 413,298.85"
-            },
-            y: -57.89
-        })
-        gsap.to(this.eyebrowRight, {
-            attr: {
-                d: "M553.29,298.85 C553.29,228.85 651.29,228.85 651.29,298.85"
-            },
-            y: -57.89
-        })
-        gsap.set(this.previousEyes, {
-            visibility: "visible"
-        })
-        gsap.set(this.laughEyes, {
-            visibility: "hidden"
-        })
+        if(this.food > 0){
+            gsap.to(this.leftEar, {
+                x: 0,
+                y: 0
+            });
+            gsap.to(this.rightEar, {
+                x: 0,
+                y: 0
+            });
+            gsap.to(this.mouth, {
+                attr: {
+                    d: "M316.82,408.09 Q380,408.09 434.43,408.09 M316.82,408.09 Q380,408.09 434.43,408.09",
+                },
+                y: 0
+            });
+            gsap.to([this.eyeLeft, this.eyeRight], {
+                attr: {
+                    width: "42.44",
+                    height: "148.85"
+                },
+                y: 0
+            })
+            gsap.to([this.pupilLeft, this.pupilRight], {
+                attr: {
+                    width: "48.44",
+                    height: "92.85"
+                },
+                y: 0
+            })
+    
+            gsap.to(this.armLeft, {
+                rotate: 0
+            })
+    
+            gsap.to(this.armRight, {
+                rotate: 0
+            })
+            gsap.to(this.eyebrowLeft, {
+                attr: {
+                    d: "M315,298.85 C315,228.85 413,228.85 413,298.85"
+                },
+                y: -57.89
+            })
+            gsap.to(this.eyebrowRight, {
+                attr: {
+                    d: "M553.29,298.85 C553.29,228.85 651.29,228.85 651.29,298.85"
+                },
+                y: -57.89
+            })
+            gsap.set(this.previousEyes, {
+                visibility: "visible"
+            })
+            gsap.set(this.laughEyes, {
+                visibility: "hidden"
+            })
+        }
     }
 
     animateHappy() {
@@ -557,13 +574,21 @@ window.onload = function () {
     })
 
     document.getElementById("speedMetabolism").addEventListener("click", function(){
-        blede.increaseMetabolism();
-        textBox.innerHTML = `Metabolism increased to ${(blede.metabolismRate)/1000}`
+        if(blede.started == true){
+            blede.increaseMetabolism();
+            textBox.innerHTML = `Metabolism increased to ${(blede.metabolismRate)/1000}`
+        }else{
+            textBox.innerHTML = "The game has not started yet! Click the play button to start."
+        }
     })
 
     document.getElementById("slowMetabolism").addEventListener("click", function(){
-        blede.decreaseMetabolism();
-        textBox.innerHTML = `Metabolism increased to ${(blede.metabolismRate)/1000}`
+        if(blede.started == true){
+            blede.decreaseMetabolism();
+            textBox.innerHTML = `Metabolism decrease to ${(blede.metabolismRate)/1000}`
+        }else{
+            textBox.innerHTML = "The game has not started yet! Click the play button to start."
+        }
     })
 
     document.getElementById("happy").addEventListener("click",function(){

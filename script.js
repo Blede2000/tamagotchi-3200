@@ -119,25 +119,25 @@ class Tamogotchi {
             if(this.food <= 0){
                 this.die();
             }else{
-                blede.animateSad();
+                this.animateSad();
                 setTimeout(function(){
-                    blede.animateTalk();
+                    this.animateTalk();
                     target.innerHTML = "I don't feel so good"
                     setTimeout(function(){
-                        blede.animateTalkStop();
-                        blede.animateNeutral()
+                        this.animateTalkStop();
+                        this.animateNeutral()
                     })
                 }, 1000)
             }
         } else {
             this.food += randomFood.foodPoints;
-            blede.animateHappy();
+            this.animateHappy();
             setTimeout(function(){
-                blede.animateTalk();
+                this.animateTalk();
                 target.innerHTML = "That was great food!"
                 setTimeout(function(){
-                    blede.animateTalkStop();
-                    blede.animateNeutral()
+                    this.animateTalkStop();
+                    this.animateNeutral()
                 })
             }, 1000)
 
@@ -147,11 +147,11 @@ class Tamogotchi {
         // this.food += randomFood.foodPoints;
     }
 
-    increaseMetabolism() {
+    decreaseMetabolism() {
         this.changeMetabolism(this.metabolismRate + 200)
     }
 
-    decreaseMetabolism() {
+    increaseMetabolism() {
         if(this.metabolismRate <= 0){
             this.die()
         }else{
@@ -168,28 +168,28 @@ class Tamogotchi {
         }
     }
     animateNeutral() {
-        gsap.to(leftEar, {
+        gsap.to(this.leftEar, {
             x: 0,
             y: 0
         });
-        gsap.to(rightEar, {
+        gsap.to(this.rightEar, {
             x: 0,
             y: 0
         });
-        gsap.to(mouth, {
+        gsap.to(this.mouth, {
             attr: {
                 d: "M316.82,408.09 Q380,408.09 434.43,408.09 M316.82,408.09 Q380,408.09 434.43,408.09",
             },
             y: 0
         });
-        gsap.to([eyeLeft, eyeRight], {
+        gsap.to([this.eyeLeft, this.eyeRight], {
             attr: {
                 width: "42.44",
                 height: "148.85"
             },
             y: 0
         })
-        gsap.to([pupilLeft, pupilRight], {
+        gsap.to([this.pupilLeft, this.pupilRight], {
             attr: {
                 width: "48.44",
                 height: "92.85"
@@ -197,59 +197,59 @@ class Tamogotchi {
             y: 0
         })
 
-        gsap.to(armLeft, {
+        gsap.to(this.armLeft, {
             rotate: 0
         })
 
-        gsap.to(armRight, {
+        gsap.to(this.armRight, {
             rotate: 0
         })
-        gsap.to(eyebrowLeft, {
+        gsap.to(this.eyebrowLeft, {
             attr: {
                 d: "M315,298.85 C315,228.85 413,228.85 413,298.85"
             },
             y: -57.89
         })
-        gsap.to(eyebrowRight, {
+        gsap.to(this.eyebrowRight, {
             attr: {
                 d: "M553.29,298.85 C553.29,228.85 651.29,228.85 651.29,298.85"
             },
             y: -57.89
         })
-        gsap.set(previousEyes, {
+        gsap.set(this.previousEyes, {
             visibility: "visible"
         })
-        gsap.set(laughEyes, {
+        gsap.set(this.laughEyes, {
             visibility: "hidden"
         })
     }
 
     animateHappy() {
-        gsap.to(leftEar, {
+        gsap.to(this.leftEar, {
             x: -40,
             y: 0
         });
-        gsap.to(rightEar, {
+        gsap.to(this.rightEar, {
             x: 40,
             y: 0
         });
-        gsap.set(mouth, {
+        gsap.set(this.mouth, {
             transformOrigin: "center center"
         })
-        gsap.to(mouth, {
+        gsap.to(this.mouth, {
             attr: {
                 d: "M316.82,408.09 Q380,458.09 434.43,408.09 M316.82,408.09 Q380,458.09 434.43,408.09",
             },
             y: 0
         });
-        gsap.to([eyeLeft, eyeRight], {
+        gsap.to([this.eyeLeft, this.eyeRight], {
             attr: {
                 width: "42.44",
                 height: "125.45"
             },
             y: 40
         })
-        gsap.to([pupilLeft, pupilRight], {
+        gsap.to([this.pupilLeft, this.pupilRight], {
             attr: {
                 width: "48.44",
                 height: "68.85"
@@ -257,56 +257,56 @@ class Tamogotchi {
             y: 30
         })
 
-        gsap.to(armLeft, {
+        gsap.to(this.armLeft, {
             rotate: 20
         })
 
-        gsap.to(armRight, {
+        gsap.to(this.armRight, {
             rotate: -20
         })
-        gsap.to(eyebrowLeft, {
+        gsap.to(this.eyebrowLeft, {
             attr: {
                 d: "M315,298.85 C315,228.85 413,228.85 413,298.85"
             },
             y: -125.46
         })
-        gsap.to(eyebrowRight, {
+        gsap.to(this.eyebrowRight, {
             attr: {
                 d: "M553.29,298.85 C553.29,228.85 651.29,228.85 651.29,298.85"
             },
             y: -125.46
         })
-        gsap.set(previousEyes, {
+        gsap.set(this.previousEyes, {
             visibility: "visible"
         })
-        gsap.set(laughEyes, {
+        gsap.set(this.laughEyes, {
             visibility: "hidden"
         })
     }
 
     animateSad() {
-        gsap.to(leftEar, {
+        gsap.to(this.leftEar, {
             x: 0,
             y: 40
         });
-        gsap.to(rightEar, {
+        gsap.to(this.rightEar, {
             x: 0,
             y: 40
         });
-        gsap.to(mouth, {
+        gsap.to(this.mouth, {
             attr: {
                 d: "M316.82,408.09 Q380,358.09 434.43,408.09 M316.82,408.09 Q380,358.09 434.43,408.09",
             },
             y: 40
         });
-        gsap.to([eyeLeft, eyeRight], {
+        gsap.to([this.eyeLeft, this.eyeRight], {
             attr: {
                 width: "42.44",
                 height: "108.85"
             },
             y: 50
         })
-        gsap.to([pupilLeft, pupilRight], {
+        gsap.to([this.pupilLeft, this.pupilRight], {
             attr: {
                 width: "48.44",
                 height: "56.85"
@@ -314,56 +314,56 @@ class Tamogotchi {
             y: 40
         })
 
-        gsap.to(armLeft, {
+        gsap.to(this.armLeft, {
             rotate: -10
         })
 
-        gsap.to(armRight, {
+        gsap.to(this.armRight, {
             rotate: 10
         })
-        gsap.to(eyebrowLeft, {
+        gsap.to(this.eyebrowLeft, {
             attr: {
                 d: "M315,288.85 C325,228.85 370,228.85 410,233.85"
             },
             y: 0
         })
-        gsap.to(eyebrowRight, {
+        gsap.to(this.eyebrowRight, {
             attr: {
                 d: "M553.29,233.85 C596.29,228.85 641.29,228.85 651.29,298.85"
             },
             y: 0
         })
-        gsap.set(previousEyes, {
+        gsap.set(this.previousEyes, {
             visibility: "visible"
         })
-        gsap.set(laughEyes, {
+        gsap.set(this.laughEyes, {
             visibility: "hidden"
         })
     }
 
     animateAngry() {
-        gsap.to(leftEar, {
+        gsap.to(this.leftEar, {
             x: 0,
             y: 40
         });
-        gsap.to(rightEar, {
+        gsap.to(this.rightEar, {
             x: 0,
             y: 40
         });
-        gsap.to(mouth, {
+        gsap.to(this.mouth, {
             attr: {
                 d: "M316.82,408.09 Q380,358.09 434.43,408.09 M316.82,408.09 Q380,358.09 434.43,408.09",
             },
             y: 40
         });
-        gsap.to([eyeLeft, eyeRight], {
+        gsap.to([this.eyeLeft, this.eyeRight], {
             attr: {
                 width: "42.44",
                 height: "108.85"
             },
             y: 50
         })
-        gsap.to([pupilLeft, pupilRight], {
+        gsap.to([this.pupilLeft, this.pupilRight], {
             attr: {
                 width: "48.44",
                 height: "56.85"
@@ -371,56 +371,56 @@ class Tamogotchi {
             y: 40
         })
 
-        gsap.to(armLeft, {
+        gsap.to(this.armLeft, {
             rotate: -10
         })
 
-        gsap.to(armRight, {
+        gsap.to(this.armRight, {
             rotate: 10
         })
-        gsap.to(eyebrowLeft, {
+        gsap.to(this.eyebrowLeft, {
             attr: {
                 d: "M315,288.85 C325,228.85 370,228.85 410,233.85"
             },
             y: 0
         })
-        gsap.to(eyebrowRight, {
+        gsap.to(this.eyebrowRight, {
             attr: {
                 d: "M553.29,233.85 C596.29,228.85 641.29,228.85 651.29,298.85"
             },
             y: 0
         })
-        gsap.set(previousEyes, {
+        gsap.set(this.previousEyes, {
             visibility: "visible"
         })
-        gsap.set(laughEyes, {
+        gsap.set(this.laughEyes, {
             visibility: "hidden"
         })
     }
 
     animateJokey(){
-        gsap.to(leftEar, {
+        gsap.to(this.leftEar, {
             x: -60,
             y: 0
         });
-        gsap.to(rightEar, {
+        gsap.to(this.rightEar, {
             x: 60,
             y: 0
         });
-        gsap.to(mouth, {
+        gsap.to(this.mouth, {
             attr: {
                 d: "M256.82,408.09 Q380,408.09 484.43,408.09 M256.82,408.09 Q380,548.09 484.43,408.09 ",
             },
             y: 0
         });
-        gsap.to([eyeLeft, eyeRight], {
+        gsap.to([this.eyeLeft, this.eyeRight], {
             attr: {
                 width: "42.44",
                 height: "148.85"
             },
             y: 0
         })
-        gsap.to([pupilLeft, pupilRight], {
+        gsap.to([this.pupilLeft, this.pupilRight], {
             attr: {
                 width: "48.44",
                 height: "92.85"
@@ -428,32 +428,32 @@ class Tamogotchi {
             y: 0
         })
 
-        gsap.to(armLeft, {
+        gsap.to(this.armLeft, {
             rotate: 40
         })
 
-        gsap.to(armRight, {
+        gsap.to(this.armRight, {
             rotate: -40
         })
-        gsap.to(eyebrowLeft, {
+        gsap.to(this.eyebrowLeft, {
             attr: {
                 d: "M295,298.85 C335,298.85 363,278.85 383,258.85"
             },
             y: -57.89
         })
-        gsap.to(eyebrowRight, {
+        gsap.to(this.eyebrowRight, {
             attr: {
                 d: "M583.29,258.85 C603.29,278.85 631.29,298.85 671.29,298.85"
             },
             y: -57.89
         })
-        gsap.set(previousEyes, {
+        gsap.set(this.previousEyes, {
             visibility: "hidden"
         })
-        gsap.set(laughEyes, {
+        gsap.set(this.laughEyes, {
             visibility: "visible"
         })
-        gsap.from(laughEyes, {
+        gsap.from(this.laughEyes, {
             y: 20
         })
     }
@@ -525,6 +525,11 @@ window.onload = function () {
 
     document.getElementById("speedMetabolism").addEventListener("click", function(){
         blede.increaseMetabolism();
+        textBox.innerHTML = `Metabolism increased to ${(blede.metabolismRate)/1000}`
+    })
+
+    document.getElementById("slowMetabolism").addEventListener("click", function(){
+        blede.decreaseMetabolism();
         textBox.innerHTML = `Metabolism increased to ${(blede.metabolismRate)/1000}`
     })
 

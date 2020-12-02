@@ -12,6 +12,18 @@ class Tamogotchi {
         this.metabolismRate = 1000;
         this.score = scoreTarget;
         this.started = false;
+        this.talkAnimation = gsap.fromTo(this.mouth, {
+            attr:{
+                d: "M316.82,408.09 Q380,408.09 434.43,408.09 M316.82,408.09 Q380,408.09 434.43,408.09"
+            }
+        },{
+            attr: {
+                d: "M316.82,408.09 Q380,368.09 434.43,408.09 M316.82,408.09 Q380,448.09 434.43,408.09"
+            },
+            duration: 0.3,
+            repeat: -1,
+            yoyo: true
+        });
 
         this.armLeft = this.svg.getElementById("Arm-left");
         this.armRight = this.svg.getElementById("Arm-right");
@@ -109,6 +121,7 @@ class Tamogotchi {
         this.food += 20;
     }
     eatRandomFood(target) {
+        if(this.started == true){
         console.log(this.foodList);
         let randomFood = this.foodList[Math.floor(Math.random() * this.foodList.length)];
         let isPoisoned = () => {
@@ -128,7 +141,7 @@ class Tamogotchi {
                     setTimeout(function(){
                         tamagotchi.animateTalkStop();
                         tamagotchi.animateNeutral()
-                    })
+                    },1000)
                 }, 1000)
             }
         } else {
@@ -141,10 +154,13 @@ class Tamogotchi {
                 setTimeout(function(){
                     tamagotchi.animateTalkStop();
                     tamagotchi.animateNeutral()
-                })
+                },1000)
             }, 1000)
 
         }
+    }else{
+        target.innerHTML = "The game has not started yet! Click the play button to start."
+    }
         // console.log(randomFood);
         // console.log(`I'm going to eat ${randomFood.name}`);
         // this.food += randomFood.foodPoints;
@@ -461,6 +477,7 @@ class Tamogotchi {
         })
     }
 
+
     animateTalk(){
         gsap.fromTo(this.mouth, {
             attr:{
@@ -473,15 +490,17 @@ class Tamogotchi {
             duration: 0.3,
             repeat: -1,
             yoyo: true
-        })
+        });
     }
 
     animateTalkStop(){
-        gsap.to(this.mouth, {
-            attr:{
-                d: "M316.82,408.09 Q380,408.09 434.43,408.09 M316.82,408.09 Q380,408.09 434.43,408.09"
-            }
-        })
+        gsap.killTweensOf(this.mouth);
+        // gsap.set(this.mouth, {
+        //     attr:{
+        //         d: "M316.82,408.09 Q380,408.09 434.43,408.09 M316.82,408.09 Q380,408.09 434.43,408.09"
+        //     },
+        //     repeat: 0
+        // });
     }
 }
 
@@ -516,18 +535,24 @@ window.onload = function () {
     })
 
     document.getElementById("compliment").addEventListener("click", function(){
-        blede.animateHappy();
-        setTimeout(function(){
-            blede.animateTalk();
-            blede.complimentUser(textBox, document.getElementById("username").value);
+        if(blede.started==true){
+            blede.animateHappy();
             setTimeout(function(){
-                blede.animateTalkStop();
-                blede.animateNeutral()
-            })
-        }, 1000)
+                blede.animateTalk();
+                blede.complimentUser(textBox, document.getElementById("username").value);
+                setTimeout(function(){
+                    blede.animateTalkStop();
+                    blede.animateNeutral();
+                },1000)
+            }, 1000)
+        }else{
+            textBox.innerHTML = "The game has not started yet! Click the play button to start."
+
+        }
     })
 
     document.getElementById("eatRandomFood").addEventListener("click", function(){
+        
         blede.eatRandomFood(textBox)
     })
 
@@ -542,70 +567,87 @@ window.onload = function () {
     })
 
     document.getElementById("happy").addEventListener("click",function(){
-        blede.animateHappy();
-        setTimeout(function(){
-            blede.animateTalk();
-            let happyTraits = blede.personalityTraits.filter(function(filter){
-                return filter.mood === "Happy";
-            })
-            let happyText = happyTraits[Math.floor(Math.random() * happyTraits.length)];
-            textBox.innerHTML = happyText;
+        if(blede.started == true){
+            blede.animateHappy();
             setTimeout(function(){
-                blede.animateTalkStop();
-                blede.animateNeutral()
-            })
-        }, 1000)
+                blede.animateTalk();
+                let happyTraits = blede.personalityTraits.filter(function(filter){
+                    return filter.mood === "Happy";
+                })
+                let happyText = happyTraits[Math.floor(Math.random() * happyTraits.length)];
+                textBox.innerHTML = happyText.saying;
+                setTimeout(function(){
+                    blede.animateTalkStop();
+                    blede.animateNeutral()
+                },1000)
+            }, 1000)
+        }else{
+            textBox.innerHTML = "The game has not started yet! Click the play button to start."
+        }
     })
 
 
     document.getElementById("sad").addEventListener("click",function(){
-        blede.animateSad();
-        setTimeout(function(){
-            blede.animateTalk();
-            let sadTraits = blede.personalityTraits.filter(function(filter){
-                return filter.mood === "Sad";
-            })
-            let sadText = sadTraits[Math.floor(Math.random() * sadTraits.length)];
-            textBox.innerHTML = sadText;
+        if(blede.started == true){
+            blede.animateSad();
             setTimeout(function(){
-                blede.animateTalkStop();
-                blede.animateNeutral()
-            })
-        }, 1000)
+                blede.animateTalk();
+                let sadTraits = blede.personalityTraits.filter(function(filter){
+                    return filter.mood === "Sad";
+                })
+                let sadText = sadTraits[Math.floor(Math.random() * sadTraits.length)];
+                textBox.innerHTML = sadText.saying;
+                setTimeout(function(){
+                    blede.animateTalkStop();
+                    blede.animateNeutral()
+                },1000)
+            }, 1000)
+        }else{
+            textBox.innerHTML = "The game has not started yet! Click the play button to start."
+        }
+
     })
 
 
     document.getElementById("angry").addEventListener("click",function(){
-        blede.animateAngry();
-        setTimeout(function(){
-            blede.animateTalk();
-            let angryTraits = blede.personalityTraits.filter(function(filter){
-                return filter.mood === "Angry";
-            })
-            let angryText = angryTraits[Math.floor(Math.random() * angryTraits.length)];
-            textBox.innerHTML = angryText;
+        if(blede.started == true){
+            blede.animateAngry();
             setTimeout(function(){
-                blede.animateTalkStop();
-                blede.animateNeutral()
-            })
-        }, 1000)
+                blede.animateTalk();
+                let angryTraits = blede.personalityTraits.filter(function(filter){
+                    return filter.mood === "Angry";
+                })
+                let angryText = angryTraits[Math.floor(Math.random() * angryTraits.length)];
+                textBox.innerHTML = angryText.saying;
+                setTimeout(function(){
+                    blede.animateTalkStop();
+                    blede.animateNeutral()
+                },1000)
+            }, 1000)
+        }else{
+            textBox.innerHTML = "The game has not started yet! Click the play button to start."
+        }
     })
 
     
     document.getElementById("joke").addEventListener("click",function(){
-        blede.animateJokey();
-        setTimeout(function(){
-            blede.animateTalk();
-            let jokeyTraits = blede.personalityTraits.filter(function(filter){
-                return filter.mood === "Jokey";
-            })
-            let jokeyText = jokeyTraits[Math.floor(Math.random() * jokeyTraits.length)];
-            textBox.innerHTML = jokeyText;
+        if(blede.started == true){
+            blede.animateJokey();
             setTimeout(function(){
-                blede.animateTalkStop();
-                blede.animateNeutral()
-            })
-        }, 1000)
+                blede.animateTalk();
+                let jokeyTraits = blede.personalityTraits.filter(function(filter){
+                    return filter.mood === "Jokey";
+                })
+                let jokeyText = jokeyTraits[Math.floor(Math.random() * jokeyTraits.length)];
+                textBox.innerHTML = jokeyText.saying;
+                setTimeout(function(){
+                    blede.animateTalkStop();
+                    blede.animateNeutral()
+                },1000)
+            }, 1000)
+        }else{
+            textBox.innerHTML = "The game has not started yet! Click the play button to start."
+        }
     })
 
     // let btn1 = document.getElementById('btn1').contentDocument;

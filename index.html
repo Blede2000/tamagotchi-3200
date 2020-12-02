@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Alejandro Alvarez Porras" />
+    <meta name="description" content="A tamagotchi pet!" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+    <title>Tamagotchi Alejandro Alvarez Porras</title>
+  </head>
+  <body>
+    <!-- embedded SVG using object tag -->
+    <!-- make sure to replace XXX.svg to your own svg file -->
+    <main>
+      <section id="character-container">
+        <div class="character-display">
+          <header>
+            <i class="fas fa-drumstick-bite"></i>
+            <span id="foodCount">50</span>
+          </header>
+          <object data="img/Character.svg" type="image/svg+xml" id="character"></object>
+          <!-- <object data="img/Background.svg" type="image/svg+xml" id="background"></object> -->
+        </div>
+        <div id="textBox" class="text-box">
+          <p>
+            Hello!
+          </p>
+        </div>
+      </section>
+      <section id="character-controls">
+        <fieldset>
+          <input id="username" type="text" placeholder="Your name!">
+        </fieldset>
+        <fieldset>
+          <legend>Controls</legend>
+          <button class="halfButton" id="start"><i class="fas fa-play"></i>          </button>
+          <button class="halfButton" id="stop"><i class="fas fa-history"></i></button>
+          <button class="fullButton" id="compliment">Compliment</button>
+          <button class="fullButton" id="eatRandomFood">Eat random food</button>
+        </fieldset>
+        <fieldset>
+          <legend>Metabolism</legend>
+          <button class="fullButton" id="speedMetabolism">Speed Metabolism</button>
+          <button class="fullButton" id="slowMetabolism">Slow Metabolism</button>
+        </fieldset>
+        <fieldset>
+          <legend>Moods</legend>
+          <button class="halfButton" id="happy">Happy</button>
+          <button class="halfButton" id="sad">Sad</button>
+          <button class="halfButton" id="angry">Angry</button>
+          <button class="halfButton" id="joke">Jokey</button>
+
+        </fieldset>
+      </section>
+
+    </main>
+    <!-- GSAP library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <!-- js file -->
+    <script src="script.js"></script>
+    <!-- <script src="tamtagotchi.js"></script> -->
+  </body>
+</html>

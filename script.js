@@ -459,11 +459,16 @@ class Tamogotchi {
     }
 
     animateTalk(){
-        gsap.to(this.mouth, {
+        gsap.fromTo(this.mouth, {
+            attr:{
+                d: "M316.82,408.09 Q380,408.09 434.43,408.09 M316.82,408.09 Q380,408.09 434.43,408.09"
+            }
+        },{
             attr: {
                 d: "M316.82,408.09 Q380,368.09 434.43,408.09 M316.82,408.09 Q380,448.09 434.43,408.09"
             },
             duration: 0.3,
+            repeat: -1,
             yoyo: true
         })
     }
@@ -557,7 +562,7 @@ window.onload = function () {
             let sadTraits = blede.personalityTraits.filter(function(filter){
                 return filter.mood === "Sad";
             })
-            let sadText = sadTraits[Math.floor(Math.random() * happyTraits.length)];
+            let sadText = sadTraits[Math.floor(Math.random() * sadTraits.length)];
             textBox.innerHTML = sadText;
             setTimeout(function(){
                 blede.animateTalkStop();
@@ -574,7 +579,7 @@ window.onload = function () {
             let angryTraits = blede.personalityTraits.filter(function(filter){
                 return filter.mood === "Angry";
             })
-            let angryText = angryTraits[Math.floor(Math.random() * happyTraits.length)];
+            let angryText = angryTraits[Math.floor(Math.random() * angryTraits.length)];
             textBox.innerHTML = angryText;
             setTimeout(function(){
                 blede.animateTalkStop();
@@ -591,7 +596,7 @@ window.onload = function () {
             let jokeyTraits = blede.personalityTraits.filter(function(filter){
                 return filter.mood === "Jokey";
             })
-            let jokeyText = jokeyTraits[Math.floor(Math.random() * happyTraits.length)];
+            let jokeyText = jokeyTraits[Math.floor(Math.random() * jokeyTraits.length)];
             textBox.innerHTML = jokeyText;
             setTimeout(function(){
                 blede.animateTalkStop();
